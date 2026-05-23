@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Generate a traveler-focused accessibility report for station pages, with clear manual verification notes." />
+    <title>DB Station Accessibility Reviewer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header" role="banner">
+      <h1>DB Station Accessibility Reviewer</h1>
+      <p>Traveler Accessibility Report generator for station pages</p>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="./index.html" aria-current="page">Tool</a></li>
+          <li><a href="./methodology.html">Methodology</a></li>
+          <li><a href="./accessibility-statement.html">Accessibility statement</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section aria-labelledby="input-heading" class="panel">
+        <h2 id="input-heading">Generate a report</h2>
+        <p><strong>Important:</strong> This tool does not scrape Deutsche Bahn live operations data. Use fixture mode and manual input. Any unverified data is labeled “Needs manual verification.”</p>
+        <form id="station-form" novalidate>
+          <div class="field-group">
+            <label for="station-url">Station page URL</label>
+            <input id="station-url" name="station-url" type="url" placeholder="https://www.bahnhof.de/frankfurt-main-hbf" autocomplete="url" required />
+          </div>
+          <div class="field-group">
+            <label for="manual-input">Manual HTML/text fallback (optional)</label>
+            <textarea id="manual-input" name="manual-input" rows="6" placeholder="Paste page excerpt, notes, or content when browser CORS blocks live fetch."></textarea>
+          </div>
+          <p id="cors-note">Browser CORS can block live fetches on GitHub Pages. This app therefore prioritizes fixture and manual-input workflows.</p>
+          <div id="form-error" class="error" role="alert" hidden></div>
+          <div class="actions">
+            <button type="submit">Generate report from URL</button>
+            <button id="load-demo" type="button">Load Frankfurt Hbf demo fixture</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="report-region" aria-labelledby="report-heading" class="panel" hidden>
+        <h2 id="report-heading">Traveler Accessibility Report</h2>
+        <div id="report-output"></div>
+        <div class="actions actions-inline">
+          <button id="export-markdown" type="button" disabled>Export Markdown report</button>
+          <button type="button" onclick="window.print()">Print-friendly view</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="compliance-heading">
+        <h2 id="compliance-heading">Compliance framing</h2>
+        <p>This project aligns to WCAG 2.2 AA, BITV 2.0, BFSG readiness, and EN 301 549-style practical assessment patterns. Automated checks support quality, but legal compliance requires human assistive-technology testing.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Portfolio project: db-station-a11y-review</p>
+    </footer>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
